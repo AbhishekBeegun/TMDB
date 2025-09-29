@@ -3,6 +3,7 @@ import { useParams ,useSearchParams} from "react-router";
 import YouTube from 'react-youtube';
 import { fetchSingleMovieDetails , fetchSingleMovieVideo , fetchYtsMovieTorrent} from '../lib/fetchData';
 import { useQuery } from '@tanstack/react-query'
+import YTSLOGO from '../assets/logo-YTS.svg'
 
 const MovieTitle = ({data}) => {
 
@@ -50,7 +51,7 @@ const MovieTitle = ({data}) => {
             ${ytsFetching ? 'animate-pulse cursor-not-allowed pointer-events-none' : ''}
             ${ytsData ? 'border border-green-500' : ''}
             bg-[#221F3D] px-3 py-2 rounded-md gap-2 cursor-pointer`} onClick={refetch} title='Torrent Links'>
-            <img src="/src/assets/logo-YTS.svg" className='w-13' />
+            <img src={YTSLOGO} className='w-13' />
           </div>
         </div>
 

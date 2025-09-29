@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Link } from 'react-router';
 import { fetchUserCatSelectMoviesData } from '../lib/fetchData';
 import { useQuery } from '@tanstack/react-query'
+import MCINELOGO from '../assets/mcine_logo.png'
 
 const LoadingCard = () => {
     return (
@@ -24,7 +25,7 @@ const Card = ({item , playingAtMCine}) => {
 
                 <img src={`https://image.tmdb.org/t/p/w300/${item.poster_path}.jpg` } className="absolute bottom-2 rounded-sm right-5 h-[85px] w-[60px] object-cover shadow-xs shadow-amber-50 bg-[#17152b]"/>
                 {playingAtMCine && 
-                 <img src="src/assets/mcine_logo.png" className='w-6 absolute top-2 right-2 z-50' />
+                 <img src={MCINELOGO} className='w-6 absolute top-2 right-2 z-50' />
                 }
                 </div>
             </div>
