@@ -80,7 +80,7 @@ const fetchSingleMovieVideo = async (video) => {
 }
 
 const fetchYtsMovieTorrent = async (YTSData) => {
-  const response = await fetch('http://localhost:5000/get-yts-movie-torrent', {
+  const response = await fetch('https://misc-api-dsjo.onrender.com/get-yts-movie-torrent', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const fetchYtsMovieTorrent = async (YTSData) => {
 };
 
 const fetchMcineData = async () => {
-  const response = await fetch('http://localhost:5000/get-mcine-movies', {
+  const response = await fetch('https://misc-api-dsjo.onrender.com/get-mcine-movies', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
