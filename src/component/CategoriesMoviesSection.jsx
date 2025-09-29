@@ -10,27 +10,29 @@ const LoadingCard = () => {
     )
 }
 
-const Card = ({item}) => {
+const Card = ({item , playingAtMCine}) => {
     return (
         <Link to={`/movie/${item.id}`}>
-            <div className='flex flex-col p-3 px-3 bg-[#17152b] rounded-xl text-white hover:shadow-sm shadow-[#cab6ff] relative group'>
-                <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}.jpg`} className='rounded-lg h-[170px] md:h-[110px] object-cover' />
-                <p className='text-xs mt-3 font-semibold line-clamp-1 w-full'>{item.original_title}</p>
+            <div className='flex flex-col p-0 px-0 bg-[#17152b] rounded-xl text-white hover:shadow-sm shadow-[#cab6ff] relative group bg-white/10 backdrop-blur-md'>
+                <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}.jpg`} className='rounded-lg rounded-b-none h-[170px] md:h-[110px] object-cover' />
+                <p className='text-xs mt-3 font-semibold line-clamp-1 w-full px-3'>{item.original_title}</p>
 
-                <div className='flex justify-start items-center gap-1 mt-2'>
+                <div className='flex justify-start items-center gap-1 mt-2 px-3 pb-3'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="#ffcd19" d="m8.125 7.092l2.608-3.47q.238-.322.566-.472T12 3t.701.15t.566.471l2.608 3.471l4.02 1.368q.534.18.822.605q.289.426.289.94q0 .237-.07.471t-.228.449l-2.635 3.573l.1 3.83q.025.706-.466 1.189T16.564 20l-.454-.056L12 18.733l-4.11 1.211q-.124.05-.24.053q-.117.003-.214.003q-.665 0-1.15-.483t-.459-1.188l.1-3.856l-2.629-3.548q-.159-.217-.229-.453Q3 10.236 3 10q0-.506.297-.942q.296-.435.828-.618z"></path></svg>
 
-                <p className='text-xs font-semibold'>{item.vote_average.toFixed(1)}</p>
+                <p className='text-xs font-semibold'>{item.vote_average?.toFixed(1)}</p>
 
                 <img src={`https://image.tmdb.org/t/p/w300/${item.poster_path}.jpg` } className="absolute bottom-2 rounded-sm right-5 h-[85px] w-[60px] object-cover shadow-xs shadow-amber-50 bg-[#17152b]"/>
-
+                {playingAtMCine && 
+                 <img src="src/assets/mcine_logo.png" className='w-6 absolute top-2 right-2 z-50' />
+                }
                 </div>
             </div>
         </Link>
     )
 }
 
-const PopularMoviesSection = () => {
+const PopularMoviesSection = ({MCineData}) => {
 
     const [Category, setCategory] = React.useState(0)
     const [Pagination, setPagination] = React.useState(1)
@@ -70,9 +72,14 @@ const PopularMoviesSection = () => {
                 <LoadingCard key={index} />  // Ensure you have a key for each loading skeleton
                 ))
             }
-            {!isLoading && data && data.map((data,index) => (
-            <Card key={index} item={data}/>
-            ))}
+            {!isLoading && data && data.map((data,index) => {
+                const isPlaying = MCineData?.some(movie => movie === data.title);
+                return (
+                  <div key={data.id}>
+                    <Card key={index} item={data} playingAtMCine={isPlaying}/>
+                  </div>
+                )
+            })}
         </div>
 
         <div className='mt-6 text-white flex justify-between items-center'>
