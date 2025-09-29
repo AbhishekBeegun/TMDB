@@ -14,4 +14,9 @@ const useHeroImgsStore = create((set) => ({
         }),
 }))
 
-export {useHeroImgsStore};
+const useMCineDataStore = create((set) => ({
+  MCinedata: [],
+  updateMCinedata: (data) => set({ MCinedata: data }),
+}));
+
+export {useHeroImgsStore, useMCineDataStore};

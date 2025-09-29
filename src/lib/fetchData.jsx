@@ -79,4 +79,43 @@ const fetchSingleMovieVideo = async (video) => {
   return data.results;
 }
 
-export {fetchTrendingMoviesData , fetchUserCatSelectMoviesData , fetchMovieBySearch, fetchSingleMovieDetails, fetchSingleMovieVideo} ;
+const fetchYtsMovieTorrent = async (YTSData) => {
+  const response = await fetch('https://misc-api-dsjo.onrender.com/get-yts-movie-torrent', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      movieTitle: YTSData.query,
+      releaseYear: YTSData.year ,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data;
+};
+
+const fetchMcineData = async () => {
+  const response = await fetch('https://misc-api-dsjo.onrender.com/get-mcine-movies', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt  : 'test'
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+}
+
+export {fetchTrendingMoviesData , fetchUserCatSelectMoviesData , fetchMovieBySearch, fetchSingleMovieDetails, fetchSingleMovieVideo ,fetchYtsMovieTorrent,fetchMcineData};
